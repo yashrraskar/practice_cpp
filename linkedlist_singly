@@ -42,9 +42,18 @@ void addatstart(){
     }
 }
 
+void deleteatstart(){
+    if (head == NULL){
+        cout<<"Nothing to delete."<<endl;
+    }
+    node * temp = head;
+    head = head -> next;
+    delete temp;
+}
+
 void display(){
     if (head == NULL){
-        cout<<"NULL";
+        cout<<"Nothing to display."<<endl;
     }
     node * temp = head;
     while(temp != NULL){
@@ -60,6 +69,8 @@ int main(){
     addatstart();
     addatend();
     addatstart();
+    display();
+    deleteatstart();
     display();
     return 0;
 }
