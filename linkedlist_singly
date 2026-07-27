@@ -29,6 +29,19 @@ void addatend(){
     }
 }
 
+void addatstart(){
+    node * nn = new node;
+    cout << "Enter data :";
+    cin >> nn->data;
+    
+    if (head==NULL){
+        head=nn;
+    } else {
+        nn->next=head;
+        head=nn;
+    }
+}
+
 void display(){
     if (head == NULL){
         cout<<"NULL";
@@ -44,8 +57,9 @@ void display(){
 int main(){
     node n1;
     addatend();
+    addatstart();
     addatend();
-    addatend();
+    addatstart();
     display();
     return 0;
 }
