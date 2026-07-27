@@ -29,8 +29,23 @@ void addatend(){
     }
 }
 
+void display(){
+    if (head == NULL){
+        cout<<"NULL";
+    }
+    node * temp = head;
+    while(temp != NULL){
+        cout << temp->data << "->";
+        temp = temp -> next;
+    }
+    cout<<"NULL"<<endl;
+}
+
 int main(){
     node n1;
     addatend();
+    addatend();
+    addatend();
+    display();
     return 0;
 }
