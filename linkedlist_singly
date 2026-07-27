@@ -45,15 +45,37 @@ void addatstart(){
 void deleteatstart(){
     if (head == NULL){
         cout<<"Nothing to delete."<<endl;
+        return;
     }
     node * temp = head;
     head = head -> next;
     delete temp;
 }
 
+void deleteatend(){
+    if (head == NULL){
+        cout<<"Nothing to delete."<<endl;
+        return;
+    }
+
+    if (head -> next == NULL){
+        delete head;
+        head = NULL;
+        return;
+    }
+
+    node * temp = head;
+    while(temp->next->next != NULL){
+        temp = temp -> next;
+    }
+    delete temp->next;
+    temp -> next = NULL;
+}
+
 void display(){
     if (head == NULL){
         cout<<"Nothing to display."<<endl;
+        return;
     }
     node * temp = head;
     while(temp != NULL){
@@ -71,6 +93,7 @@ int main(){
     addatstart();
     display();
     deleteatstart();
+    deleteatend();
     display();
     return 0;
 }
