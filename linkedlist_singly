@@ -42,6 +42,34 @@ void addatstart(){
     }
 }
 
+void addat(){
+    int pos;
+    cout << "Enter position :";
+    cin >> pos ;
+
+    if (pos == 1){
+        addatstart();
+    }
+    node * nn = new node;
+    cout << "Enter data :";
+    cin >> nn->data ;
+
+    node *temp = head;
+    
+    for (int i = 1; i<pos-1 && temp != NULL ; i++){
+        temp = temp->next;
+    }
+
+    if (temp == NULL){
+        cout << "Invalid Position." << endl;
+        delete nn;
+        return;
+    }
+
+    nn -> next = temp -> next;
+    temp -> next = nn;
+}
+
 void deleteatstart(){
     if (head == NULL){
         cout<<"Nothing to delete."<<endl;
@@ -71,6 +99,7 @@ void deleteatend(){
     delete temp->next;
     temp -> next = NULL;
 }
+
 
 void reverse(){
     node * curr=head;
@@ -133,6 +162,8 @@ int main(){
     sort();
     display();
     reverse();
+    display();
+    addat();
     display();
     return 0;
 }
