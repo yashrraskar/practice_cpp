@@ -32,54 +32,72 @@
 
     void addatend() {
 
-    node* nn = new node;
-
-    cout << "Enter data: ";
-    cin >> nn->data;
-
-    if (head == NULL) {
-        head = nn;
-    }
-    else {
-
-        node* temp = head;
-
-        while (temp->next != NULL) {
-            temp = temp->next;
+        node* nn = new node;
+    
+        cout << "Enter data: ";
+        cin >> nn->data;
+    
+        if (head == NULL) {
+            head = nn;
         }
-
-        temp->next = nn;
-        nn->prev = temp;
-    }
-
-    cout << "Node Added Successfully!" << endl;
-    }
-
+        else {
+    
+            node* temp = head;
+    
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+    
+            temp->next = nn;
+            nn->prev = temp;
+        }
+    
+        cout << "Node Added Successfully!" << endl;
+        }
 
     void deleteAtStart() {
 
-    if (head == NULL) {
-        cout << "List is Empty!" << endl;
-        return;
-    }
-
-    if (head->next == NULL) {
-        delete head;
-        head = NULL;
-        return;
-    }
-
-    node* temp = head;
-
-    head = head->next;
-
-    head->prev = NULL;
-
-    delete temp;
-
-    cout << "Node Deleted Successfully!" << endl;
-    }
-
+        if (head == NULL) {
+            cout << "List is Empty!" << endl;
+            return;
+        }
+    
+        if (head->next == NULL) {
+            delete head;
+            head = NULL;
+            return;
+        }
+    
+        node* temp = head;
+        head = head->next;
+        head->prev = NULL;
+        delete temp;
+    
+        cout << "Node Deleted Successfully!" << endl;
+        }
+    
+    void deleteAtEnd() {
+    
+        if (head == NULL) {
+            cout << "List is Empty!" << endl;
+            return;
+        }
+    
+        if (head->next == NULL) {
+            delete head;
+            head = NULL;
+            return;
+        }
+    
+        node* temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+    
+        temp->prev->next = NULL;
+        delete temp;
+        cout << "Node Deleted Successfully!" << endl;
+        }
 
     void display() {
         if (head == NULL) {
