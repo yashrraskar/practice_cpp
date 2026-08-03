@@ -1,0 +1,111 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class node{
+   public:
+   string url,data;
+   node *next;
+   node *prev;
+
+   node(string u){
+       url = u;
+       next = prev = NULL;
+   }
+};
+
+class tab{
+   node *head, *curr;
+   public :
+
+   tab(){
+       head = curr = NULL;
+   }
+
+   void addtab(string url){
+       node * nn = new node(url);
+       if (head==NULL){
+           head = curr = nn;
+           return;
+       }
+      
+       else {
+       curr->next = nn;
+       nn->prev = curr;
+       curr = nn;
+       }
+       cout << "Tab added : "<< url << endl;
+   }
+
+   void display(){
+       if (head == NULL){
+           cout << "No tabs open."<<endl;
+           return;
+       }
+       node * temp = head;
+       cout << "Opened Tabs : \n";
+       while (temp != NULL){
+           cout << temp->url << endl;
+           temp = temp-> next;
+       }
+   }
+
+   void closetab(){
+       if (head == NULL){
+           cout << "No tabs opened."<<endl;
+           return;
+       }
+       node *temp = curr;
+       cout << "Tab closed :"<<temp->url<<endl;
+      
+       if (head == curr){
+           head = curr = NULL;
+       } else {
+           curr = curr -> prev;
+           curr ->next = NULL;
+       }
+
+       delete temp;
+   }
+};
+
+int main(){
+   tab prof1;
+   string url ;
+   int choice;
+   cout << "==== WEB BROWSER ===="<<endl;
+   do {
+       cout << "\nSelect operation : "<<endl;
+       cout << "0. CLOSE."<<endl;
+       cout << "1. Add Tab."<<endl;
+       cout << "2. Display Tab."<<endl;
+       cout << "3. Close Tab."<<endl;
+
+       cout << "Enter choice :";
+       cin >> choice ;
+
+       switch (choice){
+       case 0:
+           return 0;
+           break;
+
+       case 1:
+           cout << "Enter URL : ";
+           cin >> url;
+           prof1.addtab(url);
+           break;
+
+       case 2:
+           prof1.display();
+           break;
+
+       case 3:
+           prof1.closetab();
+           break;
+       }
+
+   }
+   while (choice != 0);
+
+   return 0;
+}
