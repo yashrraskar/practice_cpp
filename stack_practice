@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+class node{
+public:
+	node *next;
+	int data;
+	
+	node(int x){
+		data = x;
+		next = NULL;
+		
+	}
+};
+
+class stack{
+	node *top;
+	
+public:
+	stack(){
+		top = NULL;
+	}
+	
+	void push(int x){
+		node *nn = new node(x);
+		nn->next=top;
+		top = nn;
+        cout << x << " pushed into stack."<<endl;
+	}
+	
+	void pop(){
+		if (top == NULL){
+			cout << "nothing to pop."<<endl;
+			return;
+		}
+		node *temp = top;
+		cout<< temp->data << " popped from stack."<<endl;
+		top=top->next;
+		delete temp;
+	}
+	
+	void display() {
+        if (top == NULL) {
+            cout << "Stack is Empty\n";
+            return;
+        }
+		
+		node *temp = top;
+        cout << "Stack Element: ";
+        while (temp != NULL){
+        	cout << endl << "| " << temp->data << " |" << endl;
+        	temp = temp->next;
+        }
+	}
+};
+
+int main(){
+	stack LIFO;
+	int choice;
+	int x;
+
+	cout << "===== STACK ====="<<endl;
+	do{
+		cout << "\nSelect Operation -" <<endl;
+		cout << "\n1. PUSH ";
+		cout << "\n2. POP ";
+		cout << "\n3. DISPLAY ";
+		cout << "\n4. STOP ";
+		cout << "\nEnter (1-4) :";
+		cin >> choice ;
+		
+		switch (choice){
+			case 1:
+				cout << "Enter data :";
+				cin >> x;
+				LIFO.push(x);
+				break;
+				
+			case 2:
+				LIFO.pop();
+				break;
+			
+			case 3:
+				LIFO.display();
+				break;
+				
+			case 4:
+				return 0;
+				break;
+				
+		}
+	}
+	while (choice != 4);
+	
+return 0;
+}
