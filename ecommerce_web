@@ -1,0 +1,137 @@
+#include <iostream>
+using namespace std;
+#include <string>
+
+class node{
+   public:
+   node*next;
+   string data;
+
+   node(string d){
+       data=d;
+       next = NULL;
+   }
+};
+
+class productlist{
+   public:
+   node*top;
+
+   productlist(){
+       top=NULL;
+   }
+
+   void addproduct(string p){
+       node*nn=new node(p);
+       nn->next=top;
+       top = nn;
+       cout << "product viewed " << nn->data << endl;
+   }
+
+   void display(){
+       if (top == NULL){
+           cout<<"nothing to display."<<endl;
+           return;
+       }
+       node *temp=top;
+       cout << "viewed products : ";
+       while(temp != NULL){
+           cout << temp->data << " <- ";
+           temp = temp -> next;
+       }
+       cout<<endl;
+   }
+
+   void listclear(){
+       if (top == NULL){
+           cout << "list already cleared"<<endl;
+           return;
+       }
+
+       cout << "deleting : "<<endl;
+       while(top != NULL){
+           node *temp=top;
+           cout << temp -> data << " " << endl;
+           top = top -> next;
+           delete temp;
+       }
+   }
+
+   void prevproduct(){
+       if (top == NULL){
+           cout << "no recently viewed products "<<endl;
+           return;
+       }
+
+       node *temp=top;
+       cout << "moving back from : "<<temp->data<< endl;
+       top=top->next;
+       delete temp;
+
+       if (top != NULL){
+           cout << "currently viewing : " << top->data << endl;
+       }
+       else{
+           cout << "no recently viewed products "<<endl;
+       }
+   }
+
+   void emptyornot(){
+       if (top == NULL){
+           cout << "list is empty"<<endl;
+       }
+       else if (top != NULL){
+           cout<< "the list is not empty"<<endl;
+       }
+   }
+
+};
+
+int main(){
+   productlist list1;
+   cout << "===== E-COMMERCE APPLICATION =====" <<endl;
+   int choice;
+   string p;
+
+   do{
+       cout << "\nSelect Operation :" <<endl;
+       cout << "1. View product \n2. Check if list is empty \n3. Display list \n4. Go to previous product \n5. Clear all history \n0. EXIT"<<endl;
+       cout << "Enter choice (0-4) : ";
+       cin >> choice;
+
+       switch (choice){
+           case 1:
+           cout << "Enter product to view : ";
+           cin >> p;
+           list1.addproduct(p);
+           break;
+
+           case 2:
+           list1.emptyornot();
+           break;
+
+           case 3:
+           list1.display();
+           break;
+
+           case 4:
+           list1.prevproduct();
+           break;
+
+           case 5:
+           list1.listclear();
+           break;
+
+           case 0:
+           return 0;
+           break;
+
+           default:
+           cout << "Invalid choice "<< endl;
+           break;
+       }
+
+   }while(choice != 0);
+
+   return 0;
+}
