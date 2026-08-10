@@ -193,3 +193,57 @@ void display(){
    }
    cout<<"."<<endl;
 }
+
+int main(){
+   node n1;
+
+   cout << "---- ++++ *TEXT EDITOR* ++++ ----"<<endl;
+
+   int choice;
+   do {
+   cout << "\n\nEnter operation to perform :" << endl;
+   cout << "0. EXIT \n1. ADD AT START \n2. ADD AT END \n3. ADD AT (POSITION)\n4. DELETE FIRST ";
+   cout << "\n5. DELETE LAST \n6. DELETE AT (POSITION) \n7. REVERSE \n8. SEARCH \n9. DISPLAY";
+   cout << "\nEnter (0-9) :";
+   cin >> choice;
+
+       switch (choice){
+       case 1:
+           addatstart();
+           break;
+       case 2:
+           addatend();
+           break;
+       case 3:
+           addat();
+           break;
+       case 4:
+           deleteatstart();
+           break;
+       case 5:
+           deleteatend();
+           break;
+       case 6:
+           deleteat();
+           break;
+       case 7:
+           reverse();
+           break;
+       case 8:
+           search();
+           break;
+       case 9:
+           display();
+           break;
+       case 0:
+           return 0;
+           break;
+       default :
+           cout << "Invalid Entry !";
+           return 0;
+
+       }
+   } while (choice != 0);
+
+   return 0;
+}
