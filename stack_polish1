@@ -1,0 +1,71 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class node{
+   public:
+   node *next;
+   char data;
+
+   node(char x){
+       next = NULL;
+       data = x;
+   }
+};
+
+class stack{
+   private:
+   node *top;
+
+   public:
+   string infix,postfix,prefix;
+
+   stack(){
+       top=NULL;
+   }
+
+   void push(char x){
+       node* nn = new node(x);
+       nn->next = top;
+       top = nn;
+   }
+
+   char pop(){
+       if(top == NULL){
+           return '\0';
+       }
+
+       node *temp = top;
+       char x = temp->data;
+       top = top->next;
+       delete temp;
+
+       return x;
+   }
+
+   char peak(){
+       if(top == NULL){
+           return '\0';
+       }
+
+       return top->data;
+   }
+
+   bool isnull(){
+       return top == NULL;
+   }
+
+   bool opcheck(char x){
+       if(x=='+' || x=='-' || x=='*' || x=='/' || x=='^'){
+           return true;
+       }
+       return false;
+   }
+
+};
+
+int main(){
+
+   return 0;
+}
+
