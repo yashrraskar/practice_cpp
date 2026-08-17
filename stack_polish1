@@ -281,7 +281,55 @@ public:
 };
 
 int main(){
+   stack s1;
+   int choice;
 
+   do {
+       cout << "Select operation :" << endl;
+       cout << " 1. Infix to Postfix Equation." << endl;
+       cout << " 2. Prefix to Infix Equation." << endl;
+       cout << " 3. Solve Infix Equation." << endl;
+       cout << " 4. Solve Prefix Equation." << endl;
+       cout << " 5. Solve Postfix Equation." << endl;
+
+       cout << "Enter choice : ";
+       cin >> choice;
+
+       switch(choice){
+
+           case 1:
+               s1.getinfix();
+               s1.infixtopostfix();
+               cout << endl;
+               break;
+
+           case 2:
+               s1.getprefix();
+               s1.prefixtoinfix();
+               cout << endl;
+               break;
+
+           case 3:
+               s1.getinfix();
+               s1.solinfix();
+               cout << endl;
+               break;
+
+           case 4:
+               s1.getprefix();
+               s1.solprefix();
+               cout << endl;
+               break;
+
+           case 5:
+               cout << "Enter Postfix Equation : ";
+               cin >> s1.postfix;
+               s1.solpostfix();
+               cout << endl;
+               break;
+       }
+
+   } while(choice != 0);
 
    return 0;
 }
