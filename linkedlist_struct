@@ -1,0 +1,129 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node* next;
+};
+
+// 1. ADD NODE FROM END (Append)
+void insertAtEnd(node* &header) {
+    int val;
+    cout << "Enter the value to add at the END: ";
+    cin >> val;
+   
+    node* nn = new node;
+    nn->data = val;
+    nn->next = nullptr;
+   
+    if (header == nullptr) {
+        header = nn;
+    } else {
+        node* temp = header;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = nn;
+    }
+    cout << "Added " << val << " at the end!\n";
+}
+
+// 2. ADD NODE FROM START (Prepend)
+void insertAtStart(node* &header) {
+    int val;
+    cout << "Enter the value to add at the START: ";
+    cin >> val;
+   
+    node* nn = new node;
+    nn->data = val;
+   
+    // Point the new node's next to whatever the header is currently pointing to
+    nn->next = header;
+   
+    // Make the header point to our new first node
+    header = nn;
+   
+    cout << "Added " << val << " at the start!\n";
+}
+
+// 3. REMOVE A NODE BY ITS VALUE
+void removeValue(node* &header) {
+    if (header == nullptr) {
+        cout << "The list is already empty!\n";
+        return;
+    }
+   
+    int val;
+    cout << "Enter the value you want to REMOVE: ";
+    cin >> val;
+   
+    // Case A: If the value to remove is in the very first node
+    if (header->data == val) {
+        node* temp = header;      // Keep track of the node we want to delete
+        header = header->next;    // Move the header to the next node
+        delete temp;              // Free up the memory
+        cout << "Removed " << val << " from the list!\n";
+        return;
+    }
+   
+    // Case B: If the value is further down the list
+    node* temp = header;
+    // Look ahead to find the node right BEFORE the one we want to delete
+    while (temp->next != nullptr && temp->next->data != val) {
+        temp = temp->next;
+    }
+   
+    // If we walked through the whole list and didn't find it
+    if (temp->next == nullptr) {
+        cout << "Value " << val << " not found in the list.\n";
+    }
+    // If we found it!
+    else {
+        node* toDelete = temp->next;    // The node to drop
+        temp->next = temp->next->next;  // Bypass the dropped node
+        delete toDelete;                // Free up the memory
+        cout << "Removed " << val << " from the list!\n";
+    }
+}
+
+// FUNCTION TO DISPLAY THE LIST
+void display(node* header) {
+    if (header == nullptr) {
+        cout << "List is empty." << endl;
+        return;
+    }
+    node* temp = header;
+    cout << "Current List: ";
+    while (temp != nullptr) {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+// MAIN PROGRAM WITH A SIMPLE MENU
+int main() {
+    node* header = nullptr;
+    int choice;
+   
+    do {
+        cout << "\n--- Linked List Operations ---\n";
+        cout << "1. Insert at End\n";
+        cout << "2. Insert at Start\n";
+        cout << "3. Remove a Value\n";
+        cout << "4. Display List\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+       
+        switch(choice) {
+            case 1: insertAtEnd(header); break;
+            case 2: insertAtStart(header); break;
+            case 3: removeValue(header); break;
+            case 4: display(header); break;
+            case 5: cout << "Exiting program. Goodbye!\n"; break;
+            default: cout << "Invalid choice! Please try again.\n";
+        }
+    } while(choice != 5);
+       return 0;
+}
