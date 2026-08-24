@@ -31,3 +31,28 @@ void display() {
 
     cout << endl;
 }
+
+void seatparty(int party){
+    if (rear == -1){
+    cout << "Waitlist is Empty" << endl;
+    return;
+    }
+    
+    cout << party << " Entered the party" << endl;
+    front++;
+}
+
+int main() {
+
+    addparty(101);
+    addparty(102);
+    addparty(103);
+    display();
+    cout << endl;
+    seatparty(101);
+    seatparty(102);
+    display();
+
+    return 0;
+}
+
