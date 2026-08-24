@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int arr[10];
+int front = 0;
+int rear = -1;
+
+void addparty(int party) {
+
+    if (rear == 9) {
+        cout << "Waitlist is full" << endl;
+        return;
+    }
+    
+    rear++;
+    arr[rear] = party;
+
+    cout << "party "<< party  << " Added to waitlist" << endl;
+}
+
+void display() {
+    if (front > rear) {
+        cout << "Waitlist is Empty" << endl;
+        return;
+    }
+    
+    cout << "Waitlist : " ;
+    for (int i = front; i <= rear; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+}
