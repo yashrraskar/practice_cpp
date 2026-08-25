@@ -1,0 +1,59 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class party{
+public:
+    string data;
+    party*next;
+            
+    party(string x){
+    data = x;
+    next = NULL;
+    }
+};
+
+class queue{
+private:
+    party*front=NULL;
+    party*rear=NULL;
+    
+public:
+    void addtolist(string name){
+        party*nn=new party(name);
+        
+        if (front == NULL){
+        cout << nn->data << " Added to waitlist. " << endl;
+        front = nn;
+        rear = nn;
+        return;
+        }
+        rear->next=nn;
+        rear=nn;
+    }
+    
+    void display(){
+    if (front == NULL){
+    cout << "Waitlist is Empty." << endl;
+    return;
+    }
+    
+    party*temp=front;
+    cout << "Waitlist :" ;
+    
+    while(temp != NULL){
+    cout << temp->data << ", " ;
+    temp = temp->next ;
+    }
+    cout << endl;
+    }
+};
+
+int main(){
+    queue P1;
+    P1.addtolist("RAM");
+    P1.addtolist("LAKSHMAN");
+    P1.display();
+    P1.display();
+return 0;
+}
