@@ -32,6 +32,23 @@ public:
         rear=nn;
     }
     
+    void enterparty(){
+        if (front == NULL){
+        cout << "Waitlist is Empty." << endl; 
+        return;
+        }
+        
+        party*temp=front;
+        cout << front->data << " entered the party." << endl;    
+        front = front->next;
+        
+        if (front == NULL){
+        rear = NULL;
+        }
+        
+        delete temp;
+    }
+    
     void display(){
     if (front == NULL){
     cout << "Waitlist is Empty." << endl;
@@ -54,6 +71,7 @@ int main(){
     P1.addtolist("RAM");
     P1.addtolist("LAKSHMAN");
     P1.display();
+    P1.enterparty();
     P1.display();
 return 0;
 }
