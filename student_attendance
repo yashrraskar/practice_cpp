@@ -1,0 +1,227 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int rollNo;
+    string name;
+    string division;
+    float attendance;
+    Node* next;
+
+    Node(int r, string n, string d, float a) {
+        rollNo = r;
+        name = n;
+        division = d;
+        attendance = a;
+        next = NULL;
+    }
+};
+
+class Attendance {
+private:
+    Node* head;
+
+public:
+
+    Attendance() {
+        head = NULL;
+    }
+
+    // a. ADD STUDENT
+    void addStudent() {
+
+        int rollNo;
+        string name, division;
+        float attendance;
+
+        cout << "Enter Roll No: ";
+        cin >> rollNo;
+
+        cout << "Enter Name: ";
+        cin >> name;
+
+        cout << "Enter Division: ";
+        cin >> division;
+
+        cout << "Enter Attendance %: ";
+        cin >> attendance;
+
+        Node* nn = new Node(rollNo, name, division, attendance);
+
+        if (head == NULL) {
+            head = nn;
+        }
+        else {
+            Node* temp = head;
+
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+
+            temp->next = nn;
+        }
+
+        cout << "Student added successfully!\n";
+    }
+
+
+    // b. REMOVE STUDENT
+    void removeStudent() {
+
+        if (head == NULL) {
+            cout << "Register is empty!\n";
+            return;
+        }
+
+        int rollNo;
+
+        cout << "Enter Roll No to remove: ";
+        cin >> rollNo;
+
+        // If first student
+        if (head->rollNo == rollNo) {
+
+            Node* temp = head;
+            head = head->next;
+
+            delete temp;
+
+            cout << "Student removed!\n";
+            return;
+        }
+
+        Node* temp = head;
+
+        while (temp->next != NULL &&
+               temp->next->rollNo != rollNo) {
+
+            temp = temp->next;
+        }
+
+        if (temp->next == NULL) {
+            cout << "Student not found!\n";
+            return;
+        }
+
+        Node* del = temp->next;
+
+        temp->next = del->next;
+
+        delete del;
+
+        cout << "Student removed!\n";
+    }
+
+
+    // c. DISPLAY STUDENTS
+    void display() {
+
+        if (head == NULL) {
+            cout << "Register is empty!\n";
+            return;
+        }
+
+        Node* temp = head;
+
+        cout << "\n===== ATTENDANCE REGISTER =====\n";
+
+        while (temp != NULL) {
+
+            cout << "Roll No: " << temp->rollNo << endl;
+            cout << "Name: " << temp->name << endl;
+            cout << "Division: " << temp->division << endl;
+            cout << "Attendance: "
+                 << temp->attendance << "%\n";
+
+            cout << "------------------------\n";
+
+            temp = temp->next;
+        }
+    }
+
+
+    // d. SEARCH BY ROLL NUMBER
+    void searchStudent() {
+
+        if (head == NULL) {
+            cout << "Register is empty!\n";
+            return;
+        }
+
+        int rollNo;
+
+        cout << "Enter Roll No to search: ";
+        cin >> rollNo;
+
+        Node* temp = head;
+
+        while (temp != NULL) {
+
+            if (temp->rollNo == rollNo) {
+
+                cout << "\nStudent Found!\n";
+                cout << "Roll No: " << temp->rollNo << endl;
+                cout << "Name: " << temp->name << endl;
+                cout << "Division: " << temp->division << endl;
+                cout << "Attendance: "
+                     << temp->attendance << "%\n";
+
+                return;
+            }
+
+            temp = temp->next;
+        }
+
+        cout << "Student not found!\n";
+    }
+};
+
+int main() {
+
+    Attendance a;
+
+    int choice;
+
+    do {
+
+        cout << "\n===== ATTENDANCE REGISTER =====\n";
+        cout << "1. Add Student\n";
+        cout << "2. Remove Student\n";
+        cout << "3. Display Students\n";
+        cout << "4. Search Student\n";
+        cout << "5. Exit\n";
+
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+
+        case 1:
+            a.addStudent();
+            break;
+
+        case 2:
+            a.removeStudent();
+            break;
+
+        case 3:
+            a.display();
+            break;
+
+        case 4:
+            a.searchStudent();
+            break;
+
+        case 5:
+            cout << "Exiting...\n";
+            break;
+
+        default:
+            cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
