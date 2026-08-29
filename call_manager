@@ -1,0 +1,134 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    string caller;
+    string type;
+    Node* next;
+
+    Node(string c, string t) {
+        caller = c;
+        type = t;
+        next = NULL;
+    }
+};
+
+class Stack {
+private:
+    Node* top;
+
+public:
+
+    Stack() {
+        top = NULL;
+    }
+
+    // Add an incoming/outgoing call
+    void addCall() {
+
+        string caller, type;
+
+        cout << "Enter caller number/name: ";
+        cin >> caller;
+
+        cout << "Enter call type (Incoming/Outgoing): ";
+        cin >> type;
+
+        Node* nn = new Node(caller, type);
+
+        nn->next = top;
+        top = nn;
+
+        cout << "Call added successfully.\n";
+    }
+
+    // Delete most recent call
+    void deleteCall() {
+
+        if (top == NULL) {
+            cout << "Call history is empty.\n";
+            return;
+        }
+
+        Node* temp = top;
+
+        cout << "Deleting call from: "
+             << temp->caller << endl;
+
+        top = top->next;
+
+        delete temp;
+    }
+
+    // Display latest call
+    void latestCall() {
+
+        if (top == NULL) {
+            cout << "No calls in history.\n";
+            return;
+        }
+
+        cout << "\nLatest Call\n";
+        cout << "Caller: " << top->caller << endl;
+        cout << "Type: " << top->type << endl;
+    }
+
+    // Check empty
+    void isEmpty() {
+
+        if (top == NULL)
+            cout << "Call history is empty.\n";
+        else
+            cout << "Call history is not empty.\n";
+    }
+};
+
+int main() {
+
+    Stack s;
+
+    int choice;
+
+    do {
+
+        cout << "\n===== CALL HISTORY =====\n";
+        cout << "1. Add Call\n";
+        cout << "2. Delete Most Recent Call\n";
+        cout << "3. Display Latest Call\n";
+        cout << "4. Check Empty\n";
+        cout << "5. Exit\n";
+
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch(choice) {
+
+        case 1:
+            s.addCall();
+            break;
+
+        case 2:
+            s.deleteCall();
+            break;
+
+        case 3:
+            s.latestCall();
+            break;
+
+        case 4:
+            s.isEmpty();
+            break;
+
+        case 5:
+            cout << "Exiting...\n";
+            break;
+
+        default:
+            cout << "Invalid choice!\n";
+        }
+
+    } while(choice != 5);
+
+    return 0;
+}
